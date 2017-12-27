@@ -36,6 +36,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'devise', '~> 4.3'
+gem 'rails_12factor', '~> 0.0.3'
 
 group :development, :test do
   gem 'sqlite3'
@@ -57,7 +58,7 @@ end
 
 group :production do
   gem 'pg', '0.18.4'
-  gem 'rails_12factor', '~> 0.0.3'
+  #gem 'rails_12factor', '~> 0.0.3'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
