@@ -78,4 +78,8 @@ class EventsController < ApplicationController
     @event = current_user.event.find_by(id: params[:id])
     redirect_to event_path, notice: "You do not have permission to edit this event" if @event.nil?
   end
+
+  def event_params
+    params.require(:event).permit(:description, :image)
+  end
 end
