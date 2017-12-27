@@ -11,29 +11,29 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, id: :ticket_name %>
+    <%= form.text_field :name, id: :ticket_name, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :seat_id_seq %>
-    <%= form.text_field :seat_id_seq, id: :ticket_seat_id_seq %>
+    <%= form.text_field :seat_id_seq, id: :ticket_seat_id_seq, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :address %>
-    <%= form.text_area :address, id: :ticket_address %>
+    <%= form.text_area :address, id: :ticket_address, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :price %>
-    <%= form.text_field :price, id: :ticket_price %>
+    <%= form.text_field :price, id: :ticket_price, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :email_address %>
-    <%= form.text_field :email_address, id: :ticket_email_address %>
+    <%= form.text_field :email_address, id: :ticket_email_address, class: 'form-control' %>
   </div>
 
   <div class="actions">
