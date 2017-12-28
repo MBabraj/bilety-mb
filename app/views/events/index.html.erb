@@ -37,9 +37,9 @@
 <div id="events" class="transitions-enabled">
   <% @events.each do |event| %>
     <div class="box">
-      <%= event.name %>
       <%= link_to image_tag(event.image.url(:medium)), event %><br/>
-      <%= event.date %>
+      <%= event.name %><br/>
+      <%= event.date %><br/>
       <%= event.description %><br/>
       <% if event.user == current_user %>
         <%= link_to 'Edit', edit_event_path(event) %>
