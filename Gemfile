@@ -41,6 +41,9 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'sdoc', '~> 0.4.2'
 gem 'paperclip', '~> 5.1'
 gem 'aws-sdk', '~> 3.0', '>= 3.0.1'
+gem 'jquery-turbolinks', '~> 2.1'
+gem 'masonry-rails', '~> 0.2.4'
+
 
 group :development, :test do
   gem 'sqlite3'
