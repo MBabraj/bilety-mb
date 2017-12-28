@@ -1,10 +1,10 @@
 <div id="events" class="transitions-enabled">
   <% @events.each do |event| %>
     <div class="box">
-      <%= link_to image_tag(event.image.url(:medium)), event %><br/>
-      <%= event.name %><br/>
-      <%= event.date %><br/>
-      <%= event.description %><br/>
+      <%= link_to image_tag(event.image.url(:medium)), event %><br>
+      <%= event.name %><br>
+      <%= event.date %><br>
+      <%= event.description %><br>
       <% if event.user == current_user %>
         <%= link_to 'Edit', edit_event_path(event) %>
         <%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?'} %>
