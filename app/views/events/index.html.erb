@@ -2,7 +2,7 @@
   <% @events.each do |event| %>
     <div class="box">
       <%= link_to image_tag(event.image.url(:medium)), event %><br>
-      <%= event.name %><br>
+      <%= link_to event.name, event %><br>
       <%= event.date %><br>
       <%= event.description %><br>
       <% if event.user == current_user %>
