@@ -1,19 +1,14 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Events</h1>
-
-
-    <% @events.each do |event| %>
-        <%= event.name %>
-        <%= link_to image_tag (event.image.url(:medium)), event %><br/>
-        <%= event.description %><br/>
-        <%= event.date %><br/>
-        <%= link_to 'Show', event %>
-        <% if event.user == current_user %>
-          <%= link_to 'Edit', edit_event_path(event) %>
-          <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %><br/>
-        <% end %>
+<% @events.each do |event| %>
+    <%= event.name %><br/>
+    <%= link_to image_tag (event.image.url(:medium)), event %><br/>
+    <%= event.description %><br/>
+    <%= event.date %><br/>
+    <%= link_to 'Show', event %>
+    <% if event.user == current_user %>
+      <%= link_to 'Edit', edit_event_path(event) %>
+      <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %><br/>
     <% end %>
+<% end %>
 
 
 <br>
