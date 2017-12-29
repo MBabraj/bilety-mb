@@ -69,17 +69,14 @@ class EventsController < ApplicationController
       @event = Event.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def event_params
-      params.require(:event).permit(:name, :description, :date)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def event_params
+    params.require(:event).permit(:name, :date, :description, :image)
+  end
 
   def correct_user
     @event = current_user.event.find_by(id: params[:id])
     redirect_to event_path, notice: "You do not have permission to edit this event" if @event.nil?
   end
 
-  def event_params
-    params.require(:event).permit(:description, :image)
-  end
 end
