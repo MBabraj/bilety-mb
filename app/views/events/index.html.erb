@@ -10,6 +10,10 @@
           <%= event.description %><br>
         </div>
 
+        <div class="panel-footer">
+          <%= link_to 'Edit', edit_event_path(event) %>
+          <%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?'} %>
+        </div>
         <% if event.user == current_user %>
           <div class="panel-footer">
             <%= link_to 'Edit', edit_event_path(event) %>
