@@ -1,16 +1,25 @@
-<p id="notice"><%= notice %></p>
-<script src='masonry.pkgd.min.js'></script>
 <div id="events" class="transitions-enabled">
   <% @events.each do |event| %>
+
     <div class="box">
-      <%= link_to image_tag(event.image.url(:medium)), event %><br>
-      <%= link_to event.name, event %><br>
-      <%= event.date %><br>
-      <%= event.description %><br>
-      <% if event.user == current_user %>
-        <%= link_to 'Edit', edit_event_path(event) %>
-        <%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?'} %>
-      <% end %>
+      <div class="panel panel-default">
+        <%= link_to image_tag(event.image.url(:medium)), event %><br>
+        <div class="panel-body">
+          <strong><%= link_to event.name, event %><br></strong>
+          <%= event.date %><br>
+          <%= event.description %><br>
+        </div>
+
+        <% if event.user == current_user %>
+          <div class="panel-footer">
+            <%= link_to 'Edit', edit_event_path(event) %>
+            <%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?'} %>
+          </div>
+        <% end %>
+
+
+      </div>
     </div>
+
   <% end %>
 </div>

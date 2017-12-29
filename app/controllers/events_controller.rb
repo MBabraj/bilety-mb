@@ -58,7 +58,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
+      format.html { redirect_to events_path, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -75,7 +75,7 @@ class EventsController < ApplicationController
   end
 
   def correct_user
-    @event = current_user.event.find_by(id: params[:id])
+    @event = current_user.events.find_by(id: params[:id])
     redirect_to event_path, notice: "You do not have permission to edit this event" if @event.nil?
   end
 
