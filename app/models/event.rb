@@ -13,11 +13,17 @@ class Event < ApplicationRecord
   validate :event_date_can_not_be_in_the_past
 
   def event_date_can_not_be_in_the_past
-    if event_date.present? && event_date < Date.today
-      errors.add(:event_date, " can not be in the past")
+    if event_date.present? && event_date <= Date.today
+      errors.add(:event_date, " needs to be in the future")
     end
   end
 
+  validates :price_low,
+            :numericality => true,
+            :format => { :with => /\A\d{1,4}(\.\d{0,2})?\Z/ }
 
+  validates :price_high,
+            :numericality => true,
+            :format => { :with => /\A\d{1,4}(\.\d{0,2})?\Z/ }
 
 end
