@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171227205848) do
+ActiveRecord::Schema.define(version: 20180109103044) do
 
   create_table "events", force: :cascade do |t|
-    t.string "name"
+    t.string "artist"
     t.string "description"
-    t.date "date"
+    t.date "event_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(version: 20171227205848) do
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
+    t.string "phone"
+    t.decimal "price_low"
+    t.decimal "price_high"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -53,6 +56,7 @@ ActiveRecord::Schema.define(version: 20171227205848) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -2,7 +2,7 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @event.name %>
+  <%= @event.artist %>
 </p>
 
 <p>
@@ -13,7 +13,12 @@
 
 <p>
   <strong>Date:</strong>
-  <%= @event.date %>
+  <%= @event.event_date %>
+</p>
+
+<p>
+  <strong>Prices:</strong>
+  <%= @event.price_low %>-<%= @event.price_high %>
 </p>
 
 <% if @event.user == current_user %>

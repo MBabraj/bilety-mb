@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :event_name %>
+    <%= form.label :artist %>
+    <%= form.text_field :artist, id: :event_artist %>
   </div>
 
   <div class="form-group">
@@ -23,12 +23,22 @@
 
   <div class="form-group">
     <%= form.label :date %>
-    <%= form.date_select :date, id: :event_date %>
+    <%= form.date_select :event_date, id: :event_date %>
   </div>
 
   <div class="form-group">
     <%= form.label :image, "Image" %>
     <%= form.file_field :image, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :price_low %>
+    <%= form.text_field :price_low, id: :event_price_low %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :price_high %>
+    <%= form.text_field :price_high, id: :event_price_high %>
   </div>
 
   <div class="actions">

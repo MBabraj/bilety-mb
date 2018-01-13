@@ -5,8 +5,8 @@
       <div class="panel panel-default">
         <%= link_to image_tag(event.image.url(:medium)), event %><br>
         <div class="panel-body">
-          <strong><%= link_to event.name, event %><br></strong>
-          <%= event.date %><br>
+          <strong><%= link_to event.artist, event %><br></strong>
+          <%= event.event_date %><br>
           <%= event.description %><br>
         </div>
 
