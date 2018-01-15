@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :admin_user, :only => [:new, :create, :destroy, :edit]
 
   # GET /events
   # GET /events.json
@@ -77,6 +78,12 @@ class EventsController < ApplicationController
   def correct_user
     @event = current_user.events.find_by(id: params[:id])
     redirect_to event_path, notice: "You do not have permission to edit this event" if @event.nil?
+  end
+
+  def admin_user
+    authenticate_or_request_with_http_basic("Ads") do |username, password|
+      username == "admin" && password == "admin"
+    end
   end
 
 end
