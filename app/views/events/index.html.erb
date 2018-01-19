@@ -8,6 +8,7 @@
           <strong><%= link_to event.artist, event %><br></strong>
           <%= event.event_date %><br>
           <%= event.description %><br>
+          <%= link_to 'Buy the ticket', 'seats/show' %><br>
         </div>
 
         <% if event.user == current_user %>
