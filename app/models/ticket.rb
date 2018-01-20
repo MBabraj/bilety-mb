@@ -1,10 +1,13 @@
 class Ticket < ApplicationRecord
+  has_many :order_items
 
-  belongs_to :user
-  belongs_to :event
+  default_scope { where(active: true)}
+
+  # belongs_to :user
+  # belongs_to :event
 
   validates :name, :presence => true, :length => { :minimum => 6 }
-  validates :email_address, :presence => true
+  # validates :email_address, :presence => true
   validates :price, :presence => true
 
 end

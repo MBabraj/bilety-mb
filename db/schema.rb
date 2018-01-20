@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180119091703) do
+ActiveRecord::Schema.define(version: 20180119204034) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -57,7 +57,37 @@ ActiveRecord::Schema.define(version: 20180119091703) do
     t.string "phone"
     t.decimal "price_low"
     t.decimal "price_high"
+    t.boolean "foradult"
     t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "order_id"
+    t.decimal "unit_price", precision: 12, scale: 3
+    t.integer "quantity"
+    t.decimal "total_price", precision: 12, scale: 3
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
+  end
+
+  create_table "order_statuses", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.decimal "subtotal", precision: 12, scale: 3
+    t.decimal "tax", precision: 12, scale: 3
+    t.decimal "shipping", precision: 12, scale: 3
+    t.decimal "total", precision: 12, scale: 3
+    t.integer "order_status_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_status_id"], name: "index_orders_on_order_status_id"
   end
 
   create_table "tickets", force: :cascade do |t|
@@ -70,6 +100,7 @@ ActiveRecord::Schema.define(version: 20180119091703) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "event_id"
+    t.boolean "active"
     t.index ["event_id"], name: "index_tickets_on_event_id"
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
@@ -88,6 +119,8 @@ ActiveRecord::Schema.define(version: 20180119091703) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
+    t.decimal "age"
+    t.date "birthdate"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

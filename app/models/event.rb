@@ -9,10 +9,11 @@ class Event < ApplicationRecord
   validates :price_low, presence: true
   validates :price_high, presence: true
   validates :event_date, presence: true
+  # validates :foradult, present: true
 
-  validate :event_date_can_not_be_in_the_past
+  validate :event_date_not_in_past
 
-  def event_date_can_not_be_in_the_past
+  def event_date_not_in_past
     if event_date.present? && event_date <= Date.today
       errors.add(:event_date, " needs to be in the future")
     end
