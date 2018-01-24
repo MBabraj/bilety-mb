@@ -1,0 +1,39 @@
+<% @tickets.each do |ticket| %>
+  <div class="card" style="margin-bottom: 10px">
+    <div class="card-body">
+      <% if current_user.is_admin %>
+        <div class="row">
+          <div class="col-6">
+            <b>Owner of ticket:</b> <%= ticket.user.email %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="row">
+        <div class="col-3">
+          <b>Event:</b> <%= ticket.event.name %>
+        </div>
+        <div class="col-2">
+          <b>Date:</b> <%= ticket.event.event_date %>
+        </div>
+        <div class="col-2">
+          <b>Places:</b> <%= ticket.places %>
+        </div>
+        <div class="col-2">
+          <b>Price:</b> <%= ticket.places * ticket.event.price %>
+        </div>
+        <div class="col-3" style="text-align: right">
+          <% if ticket.event.event_date.past? %>
+            <button type="button" class="btn btn-secondary">
+              Event time passed.
+            </button>
+
+            <!--tu jest jeszcze else-->
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>

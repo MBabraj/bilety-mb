@@ -1,5 +1,4 @@
 class Event < ApplicationRecord
-  belongs_to :user
   has_many :tickets
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
@@ -26,5 +25,7 @@ class Event < ApplicationRecord
   validates :price_high,
             :numericality => true,
             :format => { :with => /\A\d{1,4}(\.\d{0,2})?\Z/ }
+
+
 
 end

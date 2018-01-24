@@ -5,5 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :tickets
-  has_many :events
+
+  #helper_method :is_admin?
+
+  # def is_admin?
+  #   self.user_role == 1
+  # end
+
 end

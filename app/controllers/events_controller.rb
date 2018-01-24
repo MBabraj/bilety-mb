@@ -1,18 +1,25 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  # before_action :authenticate_user!, except: [:index, :show]
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :create, :update, :destroy]
   # before_action :admin_user, :only => [:new, :create, :destroy, :edit]
 
   # GET /events
   # GET /events.json
   def index
     @events = Event.all
+    puts @events
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    @event = Event.find(params[:id])
+
+    @taken = 0
+    @event.tickets.each do |ticket|
+      @taken += ticket.places
+    end
   end
 
   # GET /events/new
@@ -27,7 +34,9 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = current_user.events.build(event_params)
+    #@event = current_user.events.build(event_params)
+    @event = current_user.events.build(params.require(:event).permit(:artist, :description, :price_low, :price_high, :event_date, :image,
+                                                     :foradult))
 
     respond_to do |format|
       if @event.save
@@ -75,15 +84,19 @@ class EventsController < ApplicationController
     params.require(:event).permit(:artist, :event_date, :description, :image, :price_low, :price_high)
   end
 
-  def correct_user
-    @event = current_user.events.find_by(id: params[:id])
-    redirect_to event_path, notice: "You do not have permission to edit this event" if @event.nil?
-  end
+  # def correct_user
+  #   if !current_user.is_admin
+  #     redirect_to events_path, alert: "Only administrator can perform this action!"
+  #   end
+  # end
 
   # def admin_user
   #   authenticate_or_request_with_http_basic("Ads") do |username, password|
   #     username == "admin" && password == "admin"
   #   end
+  # end
+  #
+  # def is_admin?
   # end
 
 end

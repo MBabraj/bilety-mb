@@ -1,9 +1,20 @@
-<h3 class="text-center">Tickets for Sale</h3>
+<% @tickets.each do |ticket| %>
+  <div class="card" style="margin-bottom: 10px">
+    <div class="card-body">
 
-<div class="row">
-  <div class="col-xs-6 col-xs-offset-3">
-    <% @tickets.each do |ticket| %>
-      <%= render "ticket_row", ticket: ticket, order_item: @order_item %>
-    <% end %>
+
+      <div class="row">
+        <div class="col-6">
+          <b>Owner of ticket:</b> <%= ticket.user.email %>
+        </div>
+        <div class="col-3">
+          <b>Places:</b> <%= ticket.places %>
+        </div>
+        <div class="col-#">
+          <b>Price:</b> <%= ticket.places * ticket.event.price %>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+
+<% end %>
