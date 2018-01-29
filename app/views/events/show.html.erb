@@ -28,7 +28,7 @@
       <tr>
         <td>Available for children:</td>
         <td>
-          <% if(@event.foradult) %>
+          <% if(@event.for_adult) %>
             <%= "No" %>
           <% else %>
             <%= "Yes" %>
@@ -67,71 +67,9 @@
           </div>
         </div>
       <% else %>
-        <%= render 'ticketform' %>
+        <%= render 'events/ticketform' %>
       <% end %>
     <% end %>
   <% end %>
 <% end %>
-
-
-<!--<p id="notice"><%= notice %></p>-->
-
-<!--<p>-->
-  <!--<strong>Name:</strong>-->
-  <!--<%= @event.artist %>-->
-<!--</p>-->
-
-<!--<p>-->
-  <%= image_tag @event.image.url(:medium) %><br/>
-  <!--<strong>Description:</strong>-->
-  <!--<%= @event.description %>-->
-<!--</p>-->
-
-<!--<p>-->
-  <!--<strong>Date:</strong>-->
-  <!--<%= @event.event_date %>-->
-<!--</p>-->
-
-<!--<p>-->
-  <!--<strong>Prices:</strong>-->
-  <!--<%= @event.price_low %>-<%= @event.price_high %>-->
-<!--</p>-->
-
-<!--<p>-->
-  <!--<strong>Seats taken:</strong>-->
-  <!--<%= @taken %>-->
-<!--</p>-->
-
-<!--<% if @event.user_id == current_user %>-->
-  <!--<%= link_to 'Edit', edit_event_path(@event) %>-->
-<!--<% end %>-->
-<!--<%= link_to 'Back', events_path %>-->
-
-<!--<% if user_signed_in? %>-->
-  <!--<% if @event.tickets.exists?(user_id: current_user.id) %>-->
-    <!--<div class="card" style="margin-top: 10px">-->
-      <!--<div class="card-body">-->
-        <!--You have already bought ticket to this event.-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--<% else if @event.event_date.past? %>-->
-      <!--<div class="card" style="margin-top: 10px">-->
-        <!--<div class="card-body">-->
-          <!--You can not buy tickets for events from past!-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--<% else if (@event.event_date - Date.today).to_i > 31 %>-->
-        <!--<div class="card" style="margin-top: 10px">-->
-          <!--<div class="card-body">-->
-            <!--You can buy ticket only month before event.-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--<% else %>-->
-        <!--<%= render 'ticketform' %>-->
-      <!--<% end %>-->
-    <!--<% end %>-->
-  <!--<% end %>-->
-<!--<% end %>-->
-
-
 

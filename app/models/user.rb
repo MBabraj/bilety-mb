@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :tickets
+  has_many :events
 
   #helper_method :is_admin?
 

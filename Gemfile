@@ -44,6 +44,8 @@ gem 'aws-sdk', '~> 3.0', '>= 3.0.1'
 gem 'jquery-turbolinks'
 gem 'masonry-rails', '~> 0.2.4'
 gem 'parallax-rails'
+gem 'rails_admin'
+
 
 
 group :development, :test do
@@ -53,6 +55,9 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+
+  gem 'pry-rails'
+  gem 'pry-doc'
 end
 
 group :development do

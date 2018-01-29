@@ -8,31 +8,22 @@
           <strong><%= link_to event.artist, event %><br></strong>
           <%= event.event_date %><br>
           <%= event.description %><br>
-          Available for children
-            <% if(event.foradult) %>
+          Available for children:
+            <% if(event.for_adult) %>
               <%= "No" %>
             <% else %>
               <%= "Yes" %>
             <% end %>
           <br>
 
-
-
         </div>
 
-        <% if event.user_id == current_user %>
+        <% if event.user_id == current_user || current_user.is_admin %>
           <div class="panel-footer">
             <%= link_to 'Edit', edit_event_path(event) %>
             <%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?'} %>
           </div>
         <% end %>
-
-        <!--<% if user_signed_in? %>-->
-          <%= link_to 'Buy the ticket', 'tickets/index' %><br>
-        <!--<% else %>-->
-          <!--<li><%= link_to 'Buy the ticket', new_user_session_path %></li>-->
-        <!--<% end %>-->
-
 
       </div>
     </div>

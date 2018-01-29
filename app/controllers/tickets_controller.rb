@@ -91,10 +91,10 @@ class TicketsController < ApplicationController
       return
     end
 
-    # if (@event.event_date - Date.today).to_i > 31
-    #   redirect_to event_path(@event), alert: "You can buy ticket only month before event."
-    #   return
-    # end
+    if (@event.event_date - Date.today).to_i > 31
+      redirect_to event_path(@event), alert: "You can buy ticket only month before event."
+      return
+    end
 
     # check if user has already ticket for this event
     if @event.tickets.exists?(user_id: current_user.id)
@@ -142,19 +142,19 @@ class TicketsController < ApplicationController
   end
 
 
-  # def create
-  #   @ticket = Ticket.new(ticket_params)
-  #
-  #   respond_to do |format|
-  #     if @ticket.save
-  #       format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
-  #       format.json { render :show, status: :created, location: @ticket }
-  #     else
-  #       format.html { render :new }
-  #       format.json { render json: @ticket.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+  def create
+    @ticket = Ticket.new(ticket_params)
+
+    respond_to do |format|
+      if @ticket.save
+        format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
+        format.json { render :show, status: :created, location: @ticket }
+      else
+        format.html { render :new }
+        format.json { render json: @ticket.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # PATCH/PUT /tickets/1
   # PATCH/PUT /tickets/1.json

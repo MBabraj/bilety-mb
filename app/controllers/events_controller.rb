@@ -84,11 +84,11 @@ class EventsController < ApplicationController
     params.require(:event).permit(:artist, :event_date, :description, :image, :price_low, :price_high)
   end
 
-  # def correct_user
-  #   if !current_user.is_admin
-  #     redirect_to events_path, alert: "Only administrator can perform this action!"
-  #   end
-  # end
+  def correct_user
+    if current_user.is_admin
+      redirect_to events_path, alert: "Only administrator can perform this action!"
+    end
+  end
 
   # def admin_user
   #   authenticate_or_request_with_http_basic("Ads") do |username, password|

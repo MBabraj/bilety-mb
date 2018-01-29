@@ -50,14 +50,12 @@
       <!--</div>-->
   <!--</div>-->
 
-  <div class="form-group row">
-    <div class="col-lg-2">
-      <%= form.label :for_children %><br>
-    </div>
-    <div class="col-lg-10">
-      <%= form.check_box :for_children %>
-    </div>
-  </div>
+  <%= form.label :for_adult do %>
+    <%= form.check_box :for_adult %>
+    Only for adults
+  <% end %>
+  </br>
+
 
   <div class="actions">
     <%= form.submit %>
