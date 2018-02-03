@@ -1,7 +1,81 @@
-<div class="jumbotron">
-  <h1>Home#index</h1>
-  <p>Find me in app/views/home/index.html.erb</p>
+
+<!-- start slider -->
+<div class="slider_bg">
+  <div class="wrap">
+    <!---start-da-slider----->
+    <div class="da-slide">
+      <h2><span>Bilety-MB</span></h2>
+      <p>Buy tickets for the best events in Europe and have fun with friends!</p>
+      <!--<a href="#portfolio" class="scroll"><span class="da-img"> </span> </a>-->
+    </div>
+    <!---//End-da-slider----->
+  </div>
 </div>
+<!-----end-slider-------->
 
 
 
+
+<!--start events------>
+<div class="wrap" id="events">
+  <div class="main">
+    <!-- start gallery  -->
+    <div class="gallery1">
+      <!--start-mfp -->
+      <div id="small-dialog1" class="mfp-hide">
+        <div class="pop_up">
+          <h2>Lorem ipsum sit amet</h2>
+          <img src="/assets/icon1.png" alt=""/>
+          <p class="para">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</p>
+        </div>
+      </div>
+      <!--end-mfp -->
+      <!---start-content----->
+      <div class="gallery">
+        <div class="clear"> </div>
+        <div class="container">
+          <!--<h2>Events</h2>-->
+          <p></p>
+          <!--<ul id="filters" class="clearfix">-->
+          <!--<li><span class="filter active" data-filter="app card icon logo web">All</span></li>-->
+          <!--<li><span class="filter" data-filter="app web">Future</span></li>-->
+          <!--<li><span class="filter" data-filter="icon web card">Past</span></li>-->
+          <!--</ul>-->
+          <div id="eventslist">
+
+
+
+
+
+
+            <div class="events logo" data-cat="logo">
+              <div class="events-wrapper">
+                <a class="popup-with-zoom-anim" href="#small-dialog1">
+                  <ul class="ch-grid">
+                    <li>
+                      <div class="ch-item ch-img-1">
+                        <div class="ch-info">
+                          <img src="/assets/zoom-white.png"/>
+                          <h3>Example Title</h3>
+                          <p><a href="#">Wed Desing</a></p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </a>
+              </div>
+            </div>
+
+
+          </div>
+        </div><!-- container -->
+        <script type="text/javascript" src="/assets/fliplightbox.min.js"></script>
+        <script type="text/javascript">$('body').flipLightBox()</script>
+        <div class="clear"> </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!---End-gallery----->
+
+<%-# <%= render 'home/footer' -%>

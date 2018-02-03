@@ -35,6 +35,8 @@ gem 'jbuilder', '~> 2.5'
 #
 
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+gem 'font-awesome-sass', '~> 4.7'
+gem 'jquery-ui-rails'
 gem 'devise', '~> 4.3'
 gem 'rails_12factor', '~> 0.0.3'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'

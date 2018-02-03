@@ -31,13 +31,13 @@
           <% else %>
             <% if current_user.is_admin %>
               <% if ticket.to_return %>
-                <a href=<%= "/events/#{ticket.event.id}/tickets/#{ticket.id}" %> class="btn btn-warning btn-sm" role="button" data-method="delete" aria-disabled="true">Accept ticket return</a>
+               <%#- <%= link_to "/events/#{ticket.event.id}/tickets/#{ticket.id}", class="btn btn-warning btn-sm", role="button", data-method="delete", aria-disabled="true", 'Accept ticket', return %>
               <% else %>
                 <button type="button" class="btn btn-secondary btn-sm">No action available</button>
               <% end %>
             <% else %>
               <% if !ticket.to_return %>
-                <a href=<%= "/events/#{ticket.event.id}/tickets/#{ticket.id}" %> class="btn btn-warning btn-sm" role="button" data-method="delete" aria-disabled="true">Return ticket</a>
+                <%# a href=<%= "/events/#{ticket.event.id}/tickets/#{ticket.id}" %> class="btn btn-warning btn-sm" role="button" data-method="delete" aria-disabled="true">Return ticket</a>
               <% else %>
                 <button type="button" class="btn btn-secondary btn-sm">Wait for administrator action.</button>
               <% end %>

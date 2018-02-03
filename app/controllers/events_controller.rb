@@ -20,6 +20,7 @@ class EventsController < ApplicationController
     @event.tickets.each do |ticket|
       @taken += ticket.places
     end
+    @available = @event.size - @taken
   end
 
   # GET /events/new
@@ -36,7 +37,7 @@ class EventsController < ApplicationController
   def create
     #@event = current_user.events.build(event_params)
     @event = current_user.events.build(params.require(:event).permit(:artist, :description, :price_low, :price_high, :event_date, :image,
-                                                     :foradult))
+                                                     :for_adult, :size))
 
     respond_to do |format|
       if @event.save
@@ -47,6 +48,8 @@ class EventsController < ApplicationController
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
+    @available = @event.size
+    @taken = 0
   end
 
   # PATCH/PUT /events/1
@@ -81,7 +84,7 @@ class EventsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
-    params.require(:event).permit(:artist, :event_date, :description, :image, :price_low, :price_high)
+    params.require(:event).permit(:artist, :event_date, :description, :image, :price_low, :price_high, :size, :available, :taken)
   end
 
   def correct_user

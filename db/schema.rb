@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129161807) do
+ActiveRecord::Schema.define(version: 20180203202842) do
 
   create_table "events", force: :cascade do |t|
     t.string "artist"
@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(version: 20180129161807) do
     t.integer "image_file_size"
     t.datetime "image_updated_at"
     t.string "phone"
-    t.decimal "price_low"
-    t.decimal "price_high"
-    t.boolean "for_adult"
-    t.integer "size"
+    t.decimal "price_low", default: "0.0"
+    t.decimal "price_high", default: "0.0"
+    t.boolean "for_adult", default: false
+    t.integer "size", default: 0
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -42,7 +42,8 @@ ActiveRecord::Schema.define(version: 20180129161807) do
     t.integer "user_id"
     t.integer "event_id"
     t.boolean "active"
-    t.integer "places"
+    t.integer "places", default: 0
+    t.boolean "to_return", default: false
     t.index ["event_id"], name: "index_tickets_on_event_id"
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end

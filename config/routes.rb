@@ -40,5 +40,6 @@ Rails.application.routes.draw do
   get "tickets/all"
   get "money/index"
 
+
   resources :money
 end

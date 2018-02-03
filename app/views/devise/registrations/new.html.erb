@@ -18,10 +18,11 @@
     <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
   </div>
 
-        <div class="field">
-          <% f.label :is_admin %><br />
+
+        <%= f.label :is_admin do %>
           <%= f.check_box :is_admin %>
-        </div>
+          Admin user
+        <% end %>
 
         <div class="actions">
     <%= f.submit "Sign up", class: 'btn btn-primary' %>

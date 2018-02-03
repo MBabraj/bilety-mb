@@ -12,6 +12,11 @@
  *
  *= require 'masonry/basic'
  *= require 'masonry/transitions'
- *= require_self
  *= require_tree .
+ *= require_self
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
