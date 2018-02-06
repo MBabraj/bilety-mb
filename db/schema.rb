@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180203202842) do
+ActiveRecord::Schema.define(version: 20180205220631) do
 
   create_table "events", force: :cascade do |t|
     t.string "artist"
@@ -28,6 +28,9 @@ ActiveRecord::Schema.define(version: 20180203202842) do
     t.decimal "price_high", default: "0.0"
     t.boolean "for_adult", default: false
     t.integer "size", default: 0
+    t.integer "ticket_id"
+    t.string "taken", default: "0"
+    t.index ["ticket_id"], name: "index_events_on_ticket_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -44,7 +47,9 @@ ActiveRecord::Schema.define(version: 20180203202842) do
     t.boolean "active"
     t.integer "places", default: 0
     t.boolean "to_return", default: false
+    t.integer "events_id"
     t.index ["event_id"], name: "index_tickets_on_event_id"
+    t.index ["events_id"], name: "index_tickets_on_events_id"
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
@@ -63,7 +68,7 @@ ActiveRecord::Schema.define(version: 20180203202842) do
     t.datetime "updated_at", null: false
     t.boolean "is_admin", default: false
     t.decimal "age"
-    t.date "birthdate"
+    t.date "birth_date"
     t.float "money", default: 0.0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

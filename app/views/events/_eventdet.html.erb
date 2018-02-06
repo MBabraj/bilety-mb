@@ -1,0 +1,63 @@
+<div class="event_details">
+
+
+  <div class="row">
+    <div class="col-sm-4">
+      <%= image_tag (@event.image) %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <strong>Artist:</strong>
+    </div>
+    <div class="col-sm-4">
+      <%= @event.artist %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <strong>Description:</strong>
+    </div>
+    <div class="col-sm-4">
+      <%= @event.description %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <strong>Date:</strong>
+    </div>
+    <div class="col-sm-4">
+      <%= @event.event_date %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <strong>Price_max:</strong>
+    </div>
+    <div class="col-sm-4">
+      <%= @event.price_high %>$
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <strong>Price_min:</strong>
+    </div>
+    <div class="col-sm-4">
+      <%= @event.price_low %>$
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <strong>Seats_available:</strong>
+    </div>
+    <div class="col-sm-4">
+      <%= @event.size.to_i - @event.taken.to_i %>/<%= @event.size %>
+    </div>
+  </div>
+
+</div>

@@ -1,12 +1,15 @@
 class TicketsController < ApplicationController
+
   before_action :authenticate_user!
-  before_action :correct_user, only: [:index]
+  before_action :correct_user, only: [:index, :edit, :update, :destroy]
+  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
 
   # GET /tickets
   # GET /tickets.json
   def index
-    @event = Event.find(params[:event_id])
-    @ticket = @event.tickets
+    @ticket = Ticket.all
+    # @event = Event.find(params[:event_id])
+    # @ticket = @event.tickets
   end
 
   def all
@@ -25,7 +28,7 @@ class TicketsController < ApplicationController
 
   # GET /tickets/new
   def new
-    @ticket = Ticket.new
+    @ticket = current_user.tickets.new
   end
 
   # GET /tickets/1/edit
@@ -41,25 +44,25 @@ class TicketsController < ApplicationController
       @ticket = current_user.tickets.find(params[:id])
 
       if @ticket.event.event_date.past?
-        redirect_to tickets_all_path, alert: "You can not remove tickets for events from past."
+        redirect_to tickets_all_path, alert: "You can't remove tickets for past events."
         return
       end
 
       if !@ticket.to_return
         @ticket.to_return = true
         @ticket.save
-        redirect_to tickets_all_path, notice: "Your ticket has been marked to return."
+        redirect_to tickets_all_path, notice: "You returned ticket."
         return
       else
-        redirect_to tickets_all_path, alert: "Your ticket is already marked to return."
+        redirect_to tickets_all_path, alert: "You already returned ticket."
         return
       end
     end
 
     @ticket = Ticket.find(params[:id])
 
-    if @t.event.event_date.past?
-      redirect_to tickets_all_path, alert: "You can not remove tickets for events from past."
+    if @ticket.event.event_date.past?
+      redirect_to tickets_all_path, alert: "You can't remove tickets for past events."
       return
     end
 
@@ -68,7 +71,7 @@ class TicketsController < ApplicationController
       return
     end
 
-    @money = @ticket.places * @tticket.event.price * 0.75
+    @money = @ticket.places * @ticket.event.price_low * 0.75
     @ticket.destroy
 
     @user = User.find(current_user.id)
@@ -79,68 +82,30 @@ class TicketsController < ApplicationController
   end
 
   def create
-    @event = Event.find(params[:event_id])
-
-    @params = ticket_params
-    @params["event_id"] = params[:event_id]
-    @params["user_id"] = current_user.id
-
-    # check if event is not from past
-    # if @event.event_date.past?
-    #   redirect_to event_path(@event), alert: "You can not buy tickets for events from past!"
-    #   return
-    # end
-
-    # if (@event.event_date - Date.today).to_i > 31
-    #   redirect_to event_path(@event), alert: "You can buy ticket only month before event."
-    #   return
-    # end
-
-    # check if user has already ticket for this event
-    # if @event.tickets.exists?(user_id: current_user.id)
-    #   redirect_to event_path(@event), alert: "You already have ticket for this event!"
-    #   return
-    # end
-
-    @ticket = Ticket.new(@params)
-
-    #check if ticket has valid places number
-    # if @ticket.places < 1 || @ticket.places > 5
-    #   redirect_to event_path(@event), alert: "Invalid number of places!"
-    #   return
-    # end
-
-    # check if user has enough money
-    # if @ticket.places * @event.price_low > current_user.money
-    #   redirect_to event_path(@event), alert: "You don't have enough money!"
-    #   return
-    # end
-
-    # check if there are enough places
-    # @taken = 0
-    # @event.tickets.each do |ticket|
-    #   @taken += ticket.places
-    # end
-
-    # if @event.size - @taken < @ticket.places
-    #   redirect_to event_path(@event), alert: "There are not enough places left for this event."
-    #   return
-    # end
-
-    if @ticket.save
-      @user = User.find(current_user.id)
-      @user.money -= @ticket.places * @event.price_low
-      @user.save
-      redirect_to event_path(@event), notice: "You bought new ticket."
-
-    else
-      @error_text = ""
-      @ticket.errors.full_messages.each {|m| @error_text += m + ". "}
-      redirect_to event_path(@event), alert: @error_text
-
+    @ticket = current_user.tickets.new(ticket_params)
+    @event = @ticket.event
+    respond_to do |format|
+      if @ticket.save
+        format.html { redirect_to @event, notice: 'Ticket was successfully created.' }
+        format.json { render :'events/eventdet', status: :created, location: @ticket }
+      else
+        format.html { render :new }
+        format.json { render json: @ticket.errors, status: :unprocessable_entity }
+      end
     end
   end
 
+  def update
+    respond_to do |format|
+      if @ticket.update(ticket_params)
+        format.html { redirect_to @ticket, notice: 'Ticket was successfully updated.' }
+        format.json { render :'events/eventdet', status: :ok, location: @ticket }
+      else
+        format.html { render :edit }
+        format.json { render json: @ticket.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # PATCH/PUT /tickets/1
   # PATCH/PUT /tickets/1.json
@@ -154,6 +119,9 @@ class TicketsController < ApplicationController
   # end
   # DELETE /tickets/1.json
 
+  def set_ticket
+    @ticket = Ticket.find(params[:id])
+  end
 
   def ticket_params
     params.require(:ticket).permit(:name, :seat_id_seq, :address, :price, :email_address, :places, :taken)
@@ -164,5 +132,6 @@ class TicketsController < ApplicationController
       redirect_to events_path, alert: "Only administrator can do this!"
     end
   end
+
 
 end

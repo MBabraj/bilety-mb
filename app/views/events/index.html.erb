@@ -1,34 +1,58 @@
-  <div id="events" class="transitions-enabled">
-    <% @events.each do |event| %>
+<script src="isotope.pkgd.min.js"></script>
 
-      <div class="box">
-        <div class="panel panel-default">
-          <%= link_to image_tag(event.image.url(:medium)), event %><br>
-          <div class="panel-body">
-            <strong><%= link_to event.artist, event %><br></strong>
-            <%= event.event_date %><br>
-            <%= event.description %><br>
-            Available for children:
-              <% if event.for_adult %>
-                <%= "No" %>
-              <% else %>
-                <%= "Yes" %>
+
+<div class="Container text-center">
+  <h2>Events</h2>
+  <%#= render 'eventfilterdate' %>
+
+  <%= javascript_include_tag "isotopefilter.js" %>
+  <!--<h2>Filter</h2>-->
+  <!--<div id="filters" class="button-group">  <button class="button is-checked" data-filter="*">show all</button>-->
+    <!--<button class="button" data-filter=".for_adult">For adults</button>-->
+  <!--</div>-->
+
+  <!--<h2>Sort</h2>-->
+  <!--<div id="sorts" class="button-group">  <button class="button is-checked" data-sort-by="original-order">original order</button>-->
+    <!--<button class="button" data-sort-by="event_date">Event date</button>-->
+  <!--</div>-->
+
+
+  <div id="events" class="transitions-enabled">
+      <% @events.each do |event| %>
+
+        <div class="box">
+          <div class="panel panel-default">
+            <%= link_to image_tag(event.image.url(:medium)), event %><br>
+            <div class="panel-body">
+              <strong><%= link_to event.artist, event %><br></strong>
+              <%= event.event_date %><br>
+              <%#= event.description %><br>
+              Available for children:
+                <% if event.for_adult %>
+                  <%= "No" %>
+                <% else %>
+                  <%= "Yes" %>
+                <% end %>
+              <br>
+
+            </div>
+
+            <%# if user_signed_in? && current_user.is_admin %>
+              <div class="panel-footer">
+                <% if user_signed_in? %>
+                  <% if current_user.is_admin %>
+                    <%= link_to 'Edit', edit_event_path(event) %>
+                    <%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?'} %>
               <% end %>
-            <br>
+                <% end %>
+              </div>
+            <%# end %>
+
+
 
           </div>
-
-          <% if event.user_id == current_user %>
-            <div class="panel-footer">
-              <%= link_to 'Edit', edit_event_path(event) %>
-              <%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?'} %>
-            </div>
-          <% end %>
-
-
-
         </div>
-      </div>
 
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+</div>

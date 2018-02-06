@@ -4,14 +4,14 @@
       <% if current_user.is_admin %>
         <div class="row">
           <div class="col-6">
-            <b>Owner of ticket:</b> <%= ticket.user.email %>
+            <b>Owner id:</b> <%= ticket.user_id %>
           </div>
         </div>
       <% end %>
 
       <div class="row">
         <div class="col-3">
-          <b>Event:</b> <%= ticket.event.name %>
+          <b>Event:</b> <%= ticket.event.artist %>
         </div>
         <div class="col-2">
           <b>Date:</b> <%= ticket.event.event_date %>
@@ -20,7 +20,7 @@
           <b>Places:</b> <%= ticket.places %>
         </div>
         <div class="col-2">
-          <b>Price:</b> <%= ticket.places * ticket.event.price %>
+          <b>Price:</b> <%= ticket.places * ticket.event.price_low %>
         </div>
         <div class="col-3" style="text-align: right">
           <% if ticket.event.event_date.past? %>
@@ -31,13 +31,13 @@
           <% else %>
             <% if current_user.is_admin %>
               <% if ticket.to_return %>
-               <%#- <%= link_to "/events/#{ticket.event.id}/tickets/#{ticket.id}", class="btn btn-warning btn-sm", role="button", data-method="delete", aria-disabled="true", 'Accept ticket', return %>
+                <%#= link_to 'Accept return', event_ticket_path(@event, ticket), method: :delete %>
               <% else %>
                 <button type="button" class="btn btn-secondary btn-sm">No action available</button>
               <% end %>
             <% else %>
               <% if !ticket.to_return %>
-                <%# a href=<%= "/events/#{ticket.event.id}/tickets/#{ticket.id}" %> class="btn btn-warning btn-sm" role="button" data-method="delete" aria-disabled="true">Return ticket</a>
+                <%#= link_to 'Return ticket', event_ticket_path(@event, ticket), method: :delete, data: {confirm:'Are you sure?'} %>
               <% else %>
                 <button type="button" class="btn btn-secondary btn-sm">Wait for administrator action.</button>
               <% end %>

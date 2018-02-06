@@ -7,8 +7,9 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
-    puts @events
+    @events = Event.filter(params[:event_date_from],params[:event_date_to])
+    #@events = Event.all
+    #puts @events
   end
 
   # GET /events/1
@@ -84,7 +85,7 @@ class EventsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
-    params.require(:event).permit(:artist, :event_date, :description, :image, :price_low, :price_high, :size, :available, :taken)
+    params.require(:event).permit(:artist, :event_date, :description, :image, :price_low, :price_high, :size, :available, :taken, :places)
   end
 
   def correct_user

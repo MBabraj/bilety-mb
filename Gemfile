@@ -47,6 +47,8 @@ gem 'jquery-turbolinks'
 gem 'masonry-rails', '~> 0.2.4'
 gem 'parallax-rails'
 gem 'rails_admin'
+gem 'bootstrap-datepicker-rails'
+
 
 
 

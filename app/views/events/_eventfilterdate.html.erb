@@ -1,0 +1,20 @@
+<div class="container panel">
+  <div class="form-inline ">
+    <%= form_tag events_path, style:'display:inline;', method: 'get' do |form| %>
+      Filter by date from:
+      <%#= datepicker_input form, :event_date_from %>
+      <%#= form.date_select :event_date_from, start_year: Date.current.year-3, end_year: Date.current.year+3  %>
+
+      to:
+      <%#= datepicker_input form, :event_date_to %>
+      <%#= form.date_select :event_date_to, start_year: Date.current.year-3, end_year: Date.current.year+3  %>
+
+      <%= submit_tag "Filter", :event_date => nil, :class => 'btn btn-default'  %>
+    <% end %>
+    <button id="clear_form" class="btn btn-default"> Clear Filter </button>
+
+  </div>
+
+</div>
+
+

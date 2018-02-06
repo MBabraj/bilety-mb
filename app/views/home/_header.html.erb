@@ -4,9 +4,9 @@
     <div class="header">
       <!--------start-logo------>
       <div class="logo">
-        <%= link_to root_path do %>
-          <%= image_tag('/assets/logo.png') %>
-        <% end %>
+        <%#= link_to root_path do %>
+          <%#= image_tag('/logo.jpg') %>
+        <%# end %>
 
       </div>
       <!--------end-logo--------->
@@ -22,6 +22,8 @@
                 <%= link_to 'Admin panel', rails_admin_path, class: "nav-link" %>
               </li>
             <% end %>
+            <li><%= link_to 'Money', money_index_path %></li>
+            <li><%= link_to 'Tickets', tickets_all_path %></li>
             <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
             <li><%= link_to 'Log Out', destroy_user_session_path, method: :delete %></li>
             <li><%= link_to 'Add Event', new_event_path %></li>

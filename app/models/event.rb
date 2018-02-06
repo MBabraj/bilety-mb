@@ -26,6 +26,14 @@ class Event < ApplicationRecord
             :numericality => true,
             :format => { :with => /\A\d{1,4}(\.\d{0,2})?\Z/ }
 
+  def self.filter(event_date_from, event_date_to)
+    if event_date_from != '' && event_date_to != '' && event_date_from && event_date_to
+      Event.where({event_date:(Date.parse(event_date_from)..Date.parse(event_date_to))})
+    else
+      Event.all
+    end
+  end
+
 
 
 end

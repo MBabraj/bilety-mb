@@ -1,75 +1,26 @@
-<div class="card">
-  <div class="card-header"><strong>
-    <%=	"#{@event.artist}" %></strong>
-  </div>
+<div class="container">
 
-  <div class="card-body">
-    <p class="card-text">
-    <table class="table">
-      <tbody>
-      <tr>
-        <td>Date:</td>
-        <td><%= @event.event_date %></td>
-      </tr>
-      <tr>
-        <td>Ticket price:</td>
-        <td><%= @event.price_low %>-<%= @event.price_high %></td>
-      </tr>
-      <tr>
-        <td>Number of places:</td>
-        <td><%= @event.size %></td>
-      </tr>
-      <tr>
-        <td>Available tickets:</td>
-        <td>
-          <%= @available %>
-        </td>
-      </tr>
-      <tr>
-        <td>Available for children:</td>
-        <td>
-          <% if @event.for_adult %>
-            <%= "No" %>
-          <% else %>
-            <%= "Yes" %>
-          <% end %>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+  <h1 class="page-header"><strong>Event Details</strong></h1>
 
-    <%= @event.description %>
-    </p>
-    <% if current_user&.is_admin? %>
-      <hr>
-      <%= link_to 'See tickets bought for this event', event_tickets_path(@event), class:"btn btn-info", style: "display: inline" %>
-    <% end %>
-  </div>
-</div>
-
-<% if user_signed_in? %>
-  <% if @event.tickets.exists?(user_id: current_user.id) %>
-    <div class="card" style="margin-top: 10px">
-      <div class="card-body">
-        You have already bought ticket to this event.
-      </div>
+  <div class="row">
+    <div class="col-sm-8 ">
+      <%= render "eventdet" %>
+      <h2 class="page-header"> <strong>Tickets bought on this Event:</strong></h2>
+      <%= render "ticketlist", tickets: Ticket.where(event_id: @event.id) %>
     </div>
-  <% else if @event.event_date.past? %>
-      <div class="card" style="margin-top: 10px">
-        <div class="card-body">
-          You can not buy tickets for events from past!
-        </div>
-      </div>
-    <% else if (@event.event_date - Date.today).to_i > 31 %>
-        <div class="card" style="margin-top: 10px">
-          <div class="card-body">
-            You can buy ticket only month before event.
-          </div>
-        </div>
-      <% else %>
-        <%= render 'events/ticketform' %>
-      <% end %>
-    <% end %>
-  <% end %>
-<% end %>
 
+    <div class="col-sm-4 panel panel-default">
+      <h2 class="page-header text-center"> <strong>Buy ticket</strong> </h2>
+      <% if user_signed_in? %>
+        <%= render "newticket", ticket: Ticket.new( :event_id=>@event.id) %>
+      <% else %>
+        <h3 class="text-center"> U need to be logged in to buy ticket</h3>
+      <% end %>
+
+    </div>
+
+  </div>
+
+  <%= link_to 'Go Back', events_path, class:'btn btn-default' %>
+  <%= link_to 'Edit', edit_event_path(@event), class:'btn btn-default' %>
+</div>

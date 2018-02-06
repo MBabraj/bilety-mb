@@ -33,6 +33,10 @@
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
+        <div><%= f.label :birth_date %><br />
+          <%= f.date_select :birth_date, start_year: Date.current.year-100, end_year: Date.current.year  %>
+        </div>
+
         <%= f.label :is_admin do %>
           <%= f.check_box :is_admin %>
           Admin user
